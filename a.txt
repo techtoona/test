@@ -306,6 +306,5 @@ echo [INFO] Generating CSV file, please wait...
 set filename=results.csv
 echo.>"%filename%"
 echo CSV file "%filename%" created successfully.
-pause
 
 exit
